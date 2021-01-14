@@ -19,7 +19,7 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   @OneToOne(/*fetch = FetchType.LAZY, */cascade = CascadeType.ALL, mappedBy = "user")
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
    private Car car;
 
    public User() {}
