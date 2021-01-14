@@ -6,24 +6,27 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "cars")
+@Table(name = "cars", uniqueConstraints = @UniqueConstraint(columnNames = {"model", "series", "user_id"}))
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "model", nullable = false, unique = true)
+    @Column(name = "model", nullable = false, length = 150)
     private String model;
 
-    @Column(name = "series", nullable = false)
+    @Column(name = "series", nullable = false, length = 150)
     private Integer series;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "car")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Car() {
